@@ -2,7 +2,7 @@
 
 # Invoked by:
 #
-# sbatch intersect3.sh
+# REF=/data/rc003/Brittany/intersect/location READ=/data/rc003/Brittany/intersect/bed OUT=/data/rc003/Brittany/intersect/out sbatch intersect.sh 
 #
 
 #SBATCH -p batch
@@ -13,20 +13,20 @@
 
 # Notification configuration 
 #SBATCH --mail-type=END                                         
-#SBATCH --mail-type=FAIL                                        
+#SBATCH --mail-type=FAIL           
 #SBATCH --mail-user=brittany.howell@student.adelaide.edu.au      
 
-# Source files
-#DATA=/data/rc003/Brittany/Data/Intersect-21-3/source/22-3
-#OUT=/data/rc003/Brittany/Data/Intersect-21-3/output
-
-#echo ${DATA}
-#echo ${OUT}
-#pwd
 
 # Load the necessary modules
 module load BEDTools/2.25.0-foss-2015b
 
 # Run bedtools intersect
-bedtools intersect -a ${DATA}/Mut-F2-Rep1_CGTACG_L007.tophat2_pe.mm10.bed  -b ${DATA}/L1_Mouse_bothorf.bed  > ${OUT}/intersectData3.bed
+for iRead in *.bed; do
+echo $iRead
+ for iRef in ${READ}/*; do
+echo $iRef
+echo "Trying to read iRead: $iRead"
+# bedtools intersect -a iRead/*.bed  -b iRef/*.bed  > ${OUT}/*.bed
+ done 
+done 
 2> output.log
