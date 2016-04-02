@@ -28,7 +28,7 @@ for iRef in *.bed; do
  	iNameS=$(echo $iRead | sed 's|.*\/\(.*\)|\1|')
  	iRefEx=${iRef%.bed}
  	iName=$iRefEx-$iNameS
- bedtools intersect -a $iRead  -b $iRef  -s -f 0.5 > ../out/$iName
+ bedtools intersect -a $iRead  -b $iRef  -f 0.5 > ../out/$iName
  done 
 done 
 2> output.log
