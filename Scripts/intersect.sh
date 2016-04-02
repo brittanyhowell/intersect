@@ -7,9 +7,9 @@
 
 #SBATCH -p batch
 #SBATCH -N 1 
-#SBATCH -n 16  				# Asking for cores
-#SBATCH --time=1-00:00  	# Days taken
-#SBATCH --mem=30GB 			# memory thought to be required
+#SBATCH -n 8  				
+#SBATCH --time=1-00:00  	
+#SBATCH --mem=30GB 			
 
 # Notification configuration 
 #SBATCH --mail-type=END                                         
@@ -28,7 +28,7 @@ for iRef in *.bed; do
  	iNameS=$(echo $iRead | sed 's|.*\/\(.*\)|\1|')
  	iRefEx=${iRef%.bed}
  	iName=$iRefEx-$iNameS
- bedtools intersect -a $iRead  -b $iRef  > ../out/$iName
+ bedtools intersect -a $iRead  -b $iRef  -s -f 0.5 > ../out/$iName
  done 
 done 
 2> output.log
